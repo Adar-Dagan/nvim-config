@@ -5,7 +5,6 @@ return {
 	require("plugins.conform"),
 	require("plugins.lsp"),
 	require("plugins.treesitter"),
-    require("plugins.gitlab"),
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "j-hui/fidget.nvim", opts = {} },

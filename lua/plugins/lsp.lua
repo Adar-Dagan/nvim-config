@@ -5,24 +5,6 @@ return {
 		{ "hrsh7th/nvim-cmp" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
-		{
-			"zbirenbaum/copilot.lua",
-			opts = {
-				suggestion = {
-					enabled = true,
-					auto_trigger = true,
-					keymap = {
-						accept = "<C-j>",
-						accept_word = "<C-k>",
-						next = "<C-[>",
-						prev = "<C-]>",
-						dismiss = false,
-					},
-				},
-				panel = { enabled = false },
-			},
-		},
-		{ "zbirenbaum/copilot-cmp", opts = {} },
 	},
 	init = function()
 		vim.opt.signcolumn = "yes"
@@ -82,7 +64,6 @@ return {
 		cmp.setup({
 			sources = {
 				{ name = "nvim_lsp" },
-				{ name = "copilot" },
 			},
 			mapping = cmp.mapping.preset.insert({
 				-- `Enter` key to confirm completion
