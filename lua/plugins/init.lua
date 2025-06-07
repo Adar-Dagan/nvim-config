@@ -1,3 +1,11 @@
+vim.api.nvim_create_autocmd("UIEnter", {
+	callback = function()
+		if vim.fn.argv(0) == "" then
+			require("telescope.builtin").find_files({})
+		end
+	end,
+})
+
 return {
 	require("plugins.telescope"),
 	require("plugins.harpoon"),

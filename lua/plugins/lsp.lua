@@ -3,30 +3,21 @@ return {
 	dependencies = {
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/nvim-cmp" },
-		{ "williamboman/mason.nvim" },
-		{ "williamboman/mason-lspconfig.nvim" },
 	},
 	init = function()
-		vim.opt.signcolumn = "yes"
+		vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
-		local lspconfig_defaults = require("lspconfig").util.default_config
-		lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-			"force",
-			lspconfig_defaults.capabilities,
-			require("cmp_nvim_lsp").default_capabilities()
-		)
+		vim.lsp.enable("lua_ls")
+		vim.lsp.enable("clangd")
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
-			callback = function(event)
-				local bufnr = event.buf
+			callback = function(args)
+				local bufnr = args.buf
 
 				vim.keymap.set("n", "gd", function()
 					vim.lsp.buf.definition()
 				end, { desc = "[G]o to [D]efinition", buffer = bufnr })
-				vim.keymap.set("n", "K", function()
-					vim.lsp.buf.hover()
-				end, { desc = "[H]over", buffer = bufnr })
 				vim.keymap.set("n", "<leader>rn", function()
 					vim.lsp.buf.rename()
 				end, { desc = "[R]ename", buffer = bufnr })
@@ -39,21 +30,20 @@ return {
 				vim.keymap.set("i", "<C-h>", function()
 					vim.lsp.buf.signature_help()
 				end, { desc = "[S]ignature [H]elp", buffer = bufnr })
-
 				vim.keymap.set("n", "<leader>ld", function()
 					vim.diagnostic.open_float()
 				end, { desc = "[L]ine [D]iagnostics", buffer = bufnr })
 				vim.keymap.set("n", "<leader>ne", function()
-					vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+					vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
 				end, { desc = "[N]ext [E]rror", buffer = bufnr })
 				vim.keymap.set("n", "<leader>nd", function()
-					vim.diagnostic.goto_next()
+					vim.diagnostic.jump({ count = 1, float = true })
 				end, { desc = "[N]ext [D]iagnostic", buffer = bufnr })
 				vim.keymap.set("n", "<leader>pe", function()
-					vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+					vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
 				end, { desc = "[P]revious [E]rror", buffer = bufnr })
 				vim.keymap.set("n", "<leader>pd", function()
-					vim.diagnostic.goto_prev()
+					vim.diagnostic.jump({ count = -1, float = true })
 				end, { desc = "[P]revious [D]iagnostic", buffer = bufnr })
 			end,
 		})
@@ -78,20 +68,6 @@ return {
 					vim.snippet.expand(args.body)
 				end,
 			},
-		})
-
-		require("mason").setup({})
-		require("mason-lspconfig").setup({
-			ensure_installed = { "lua_ls" },
-		})
-
-		require("mason-lspconfig").setup_handlers({
-			-- The first entry (without a key) will be the default handler
-			-- and will be called for each installed server that doesn't have
-			-- a dedicated handler.
-			function(server_name) -- default handler (optional)
-				require("lspconfig")[server_name].setup({})
-			end,
 		})
 	end,
 }
