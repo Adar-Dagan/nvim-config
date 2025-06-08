@@ -9,6 +9,7 @@ return {
 
 		vim.lsp.enable("lua_ls")
 		vim.lsp.enable("clangd")
+		vim.lsp.enable("pyright")
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",

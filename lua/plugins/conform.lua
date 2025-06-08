@@ -24,6 +24,8 @@ return {
 				cpp = { "clang-format" },
 				lua = { "stylua" },
 				python = { "black" },
+				json = { "clang-format" },
+				opencl = { "clang-format" },
 			},
 		}
 	end,

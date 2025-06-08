@@ -38,6 +38,23 @@ vim.filetype.add({
 	},
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	callback = function()
+		-- Check if the filetype is 'conf' or empty (indicating not recognized)
+		if vim.bo.filetype == "conf" or vim.bo.filetype == "" then
+			-- Read the first line of the buffer
+			local first_line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
+
+			-- Check if the first line starts with a bash shebang
+			if first_line and first_line:match("^#![ \t]*/?usr/(local/)?bin/env[ \t]+bash") then
+				vim.bo.filetype = "bash"
+			elseif first_line and first_line:match("^#![ \t]*/?bin/bash") then
+				vim.bo.filetype = "bash"
+			end
+		end
+	end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "cl", "cpp" },
 	callback = function()
