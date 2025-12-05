@@ -7,10 +7,6 @@ return {
 	init = function()
 		vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 
-		vim.lsp.enable("lua_ls")
-		vim.lsp.enable("clangd")
-		vim.lsp.enable("pyright")
-
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
 			callback = function(args)

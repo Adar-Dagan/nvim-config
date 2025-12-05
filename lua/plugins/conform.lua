@@ -26,6 +26,8 @@ return {
 				python = { "black" },
 				json = { "clang-format" },
 				opencl = { "clang-format" },
+				zig = { "zigfmt" },
+				rust = { "rustfmt" },
 			},
 		}
 	end,

@@ -13,6 +13,8 @@ return {
 	require("plugins.conform"),
 	require("plugins.lsp"),
 	require("plugins.treesitter"),
+	{ "mason-org/mason-lspconfig.nvim", opts = {} },
+	{ "mason-org/mason.nvim", opts = {} },
 	{ "nvim-tree/nvim-web-devicons" },
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "j-hui/fidget.nvim", opts = {} },
