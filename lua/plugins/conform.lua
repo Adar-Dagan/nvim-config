@@ -28,6 +28,12 @@ return {
 				opencl = { "clang-format" },
 				zig = { "zigfmt" },
 				rust = { "rustfmt" },
+				markdown = { "prettier" },
+			},
+			formatters = {
+				prettier = {
+					prepend_args = { "--prose-wrap", "always" },
+				},
 			},
 		}
 	end,

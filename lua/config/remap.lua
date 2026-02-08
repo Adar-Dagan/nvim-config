@@ -22,3 +22,7 @@ vim.keymap.set("n", "<M-k>", "<C-W>+")
 vim.keymap.set("n", "<M-j>", "<C-W>-")
 
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "[G]it [S]tatus" })
+
+vim.keymap.set("n", "<leader>yp", function()
+	vim.fn.setreg("+", vim.api.nvim_buf_get_name(0))
+end, { desc = "[Y]ank file [P]ath" })

@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd("UIEnter", {
 	callback = function()
-		if vim.fn.argv(0) == "" then
+		if vim.fn.argc() == -1 then
 			require("telescope.builtin").find_files({})
 		end
 	end,
@@ -13,6 +13,8 @@ return {
 	require("plugins.conform"),
 	require("plugins.lsp"),
 	require("plugins.treesitter"),
+	require("plugins.copilot"),
+	{ "will133/vim-dirdiff" },
 	{ "mason-org/mason-lspconfig.nvim", opts = {} },
 	{ "mason-org/mason.nvim", opts = {} },
 	{ "nvim-tree/nvim-web-devicons" },

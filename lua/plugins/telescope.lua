@@ -14,11 +14,13 @@ return {
 		require("telescope").load_extension("recent-files")
 
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "[P]roject [F]iles" })
+		vim.keymap.set("n", "<leader>pf", function()
+			builtin.find_files({})
+		end, { desc = "[P]project [F]iles" })
 		vim.keymap.set("n", "<leader>pa", function()
-			builtin.find_files({ no_ignore = true, hidden = true })
-		end, { desc = "[P]project [A]ll files" })
-		vim.keymap.set("n", "<leader>pl", "zy lua:builtin.live_grep", { desc = "[P]roject [L]ive grep" })
+			builtin.find_files({ hidden = true })
+		end, { desc = "[P]project [A]ll" })
+		vim.keymap.set("n", "<leader>pl", builtin.live_grep, { desc = "[P]roject [L]ive grep" })
 		vim.keymap.set("n", "<leader>gw", builtin.grep_string, { desc = "[G]rep [W]ord" })
 		vim.keymap.set("v", "<leader>gw", function()
 			-- get region with the cursor position and the visual position
