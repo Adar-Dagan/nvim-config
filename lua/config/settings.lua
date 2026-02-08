@@ -85,30 +85,30 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Disable folding in diff mode
 -- Handle multiple scenarios: nvim -d, :diffthis, and window switching
 local function disable_diff_folding()
-  if vim.wo.diff then
-    vim.wo.foldenable = false
-  end
+	if vim.wo.diff then
+		vim.wo.foldenable = false
+	end
 end
 
 -- When nvim starts with -d flag
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    -- Check all windows for diff mode
-    for _, win in ipairs(vim.api.nvim_list_wins()) do
-      if vim.wo[win].diff then
-        vim.wo[win].foldenable = false
-      end
-    end
-  end,
+	callback = function()
+		-- Check all windows for diff mode
+		for _, win in ipairs(vim.api.nvim_list_wins()) do
+			if vim.wo[win].diff then
+				vim.wo[win].foldenable = false
+			end
+		end
+	end,
 })
 
 -- When entering a window in diff mode
 vim.api.nvim_create_autocmd("WinEnter", {
-  callback = disable_diff_folding,
+	callback = disable_diff_folding,
 })
 
 -- When diff mode is toggled on/off during session
 vim.api.nvim_create_autocmd("OptionSet", {
-  pattern = "diff",
-  callback = disable_diff_folding,
+	pattern = "diff",
+	callback = disable_diff_folding,
 })

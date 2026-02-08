@@ -4,6 +4,7 @@ return {
 	event = "InsertEnter",
 	opts = {
 		suggestion = {
+			auto_trigger = false,
 			keymap = {
 				accept = "<C-s>",
 			},

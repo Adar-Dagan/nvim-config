@@ -9,7 +9,17 @@ return {
 			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 		},
 	},
-	opts = function()
+	opts = {
+		defaults = {
+			layout_config = {
+				height = 0.9999,
+				width = 0.9999,
+				preview_width = 0.47,
+			},
+		},
+	},
+	config = function(_, opts)
+		require("telescope").setup(opts)
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("recent-files")
 
@@ -39,15 +49,5 @@ return {
 		vim.keymap.set("n", "<leader>po", function()
 			require("telescope").extensions["recent-files"].recent_files({})
 		end, { desc = "[P]roject [O]ld files" })
-
-		return {
-			defaults = {
-				layout_config = {
-					height = 0.9999,
-					width = 0.9999,
-					preview_width = 0.47,
-				},
-			},
-		}
 	end,
 }

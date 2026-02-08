@@ -1,4 +1,3 @@
-vim.treesitter.language.register("c", { "opencl" })
 -- Install lazy package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

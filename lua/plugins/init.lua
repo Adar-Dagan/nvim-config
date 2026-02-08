@@ -1,12 +1,14 @@
 vim.api.nvim_create_autocmd("UIEnter", {
 	callback = function()
-		if vim.fn.argc() == -1 then
+		-- Only open telescope if: no args, buffer has single empty line, and buffer is unnamed
+		if vim.fn.argc() == 0 and vim.fn.line("$") == 1 and vim.fn.getline(1) == "" then
 			require("telescope.builtin").find_files({})
 		end
 	end,
 })
 
 return {
+	require("plugins.nightfox"),
 	require("plugins.telescope"),
 	require("plugins.harpoon"),
 	require("plugins.oil"),
