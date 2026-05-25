@@ -15,8 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.jukit_mappings = 0
-
 require("lazy").setup({
 	{ import = "plugins" },
 }, {

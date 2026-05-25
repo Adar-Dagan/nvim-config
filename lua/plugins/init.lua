@@ -8,14 +8,6 @@ vim.api.nvim_create_autocmd("UIEnter", {
 })
 
 return {
-	require("plugins.nightfox"),
-	require("plugins.telescope"),
-	require("plugins.harpoon"),
-	require("plugins.oil"),
-	require("plugins.conform"),
-	require("plugins.lsp"),
-	require("plugins.treesitter"),
-	require("plugins.copilot"),
 	{ "will133/vim-dirdiff" },
 	{ "mason-org/mason-lspconfig.nvim", opts = {} },
 	{ "mason-org/mason.nvim", opts = {} },

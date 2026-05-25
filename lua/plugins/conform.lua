@@ -4,7 +4,7 @@ return {
 		{
 			"<leader>f",
 			function()
-				require("conform").format({ lsp_fallback = false }, function(err, did_edit)
+				require("conform").format({ lsp_format = "never" }, function(err, did_edit)
 					if err then
 						print("Error: " .. err)
 					else
